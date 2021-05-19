@@ -60,35 +60,32 @@ public class SwitchButton extends Label{
                     splitTime = Duration.ZERO;
                     splitTimeSeconds.set(splitTime.toSeconds());
                     System.out.println("test");
+
                 }
                 else {
                     setText("Clock OFF");
                     setStyle("-fx-background-color: red;-fx-text-fill:white;");
                     setContentDisplay(ContentDisplay.LEFT);
                     System.out.println("test1");
-                    timeline = new Timeline(new KeyFrame(
-                            Duration.millis(1000), new EventHandler<ActionEvent>() {
-                        @Override
-                        public void handle(ActionEvent actionEvent) {
-                            Duration duration = ((KeyFrame) actionEvent.getSource()).getTime();
-                            time = time.add(duration);
-                            splitTime = splitTime.add(duration);
-                            timeSeconds.set(time.toSeconds());
-                            splitTimeSeconds.set(splitTime.toSeconds());
-                        }
-
-                }));
+//                    timeline = new Timeline(new KeyFrame(
+//                            Duration.millis(1000), new EventHandler<ActionEvent>() {
+//                        @Override
+//                        public void handle(ActionEvent actionEvent) {
+//                            Duration duration = ((KeyFrame) actionEvent.getSource()).getTime();
+//                            time = time.add(duration);
+//                            splitTime = splitTime.add(duration);
+//                            timeSeconds.set(time.toSeconds());
+//                            splitTimeSeconds.set(splitTime.toSeconds());
+//                        }
+                }
                     timeline.setCycleCount(Timeline.INDEFINITE);
                     timeline.play();
-                }
             }
         });
         switchedON.set(false);
         TextArea textField = new TextArea();
         textField.setBounds(20, 20, 300, 30);
         Text info = new Text(20, 39, "timerLabel");
-
-
         //display
 //        StackPane root = new StackPane();
 //        Scene scene = new Scene(root, 300, 300);
