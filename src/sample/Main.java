@@ -35,7 +35,7 @@ import java.util.concurrent.TimeUnit;
 public class Main extends Application {
     private TableView table = new TableView();
 
-    public int count = 0, test = 0;
+    public int count = 0, switchButton = 0;
 
     public void start(Stage primaryStage) throws Exception{
 //        Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
@@ -46,18 +46,29 @@ public class Main extends Application {
         final Stopwatch stopwatch = new Stopwatch();
         stopwatch.setTextFill(Color.BLACK);
         stopwatch.setStyle("-fx-font-size: 4em;");
+        stopwatch.setTranslateX(0);
+        stopwatch.setTranslateY(50);
 
+        //stopwatch start
 //        final Button start = new Button("Start");
 //        start.setOnAction(eve -> {
 //            start.setText(stopwatch.isActive() ? "Start" : "Stop");
 //            stopwatch.start();
 //        });
 
-        SwitchButton test = new SwitchButton();
-        test.Timer1(stopwatch);
-        test.switchOnProperty();
-        test.setTranslateX(250);
-        test.setTranslateY(40);
+        //stopwatch reset
+//        final Button reset = new Button("Reset");
+//        reset.setOnAction(eve -> {
+//            stopwatch.reset();
+//        });
+
+        //switch button
+        SwitchButton switchButton = new SwitchButton();
+        switchButton.Timer1(stopwatch);
+        switchButton.switchOnProperty();
+        switchButton.setTranslateX(250);
+        switchButton.setTranslateY(40);
+
 
         TextArea textField = new TextArea();
         textField.setBounds(20, 20, 300, 30);
@@ -65,10 +76,7 @@ public class Main extends Application {
         info.setFont(Font.font("Verdana", 20));
         info.setFill(Color.WHITE);
 
-        final Button reset = new Button("Reset");
-        reset.setOnAction(eve -> {stopwatch.reset();});
-        stopwatch.setTranslateX(0);
-        stopwatch.setTranslateY(50);
+
 
 //        primaryStage.setScene(new Scene(new HBox(stopwatch, new VBox(start, reset)), 320, 100));
         primaryStage.setScene(new Scene(new HBox(stopwatch), 320, 100));
@@ -92,7 +100,7 @@ public class Main extends Application {
 //        info1.setFill(Color.WHITE);
 //        Group root2 = new Group(textField);
 
-        Group root1 = new Group(info, test, countUp, stopwatch);
+        Group root1 = new Group(info, switchButton, countUp, stopwatch);
 //        root1.getChildren().add(countUp);
 //        Scene scene = new Scene(root1, 20, 20, Color.GREEN);
 //        primaryStage.setScene(scene);
