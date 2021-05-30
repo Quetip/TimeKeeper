@@ -29,11 +29,11 @@ import javafx.util.Duration;
 public class SwitchButton extends Label{
 
     private SimpleBooleanProperty switchedON = new SimpleBooleanProperty(true);
-
+    int split = 0;
     //method
     public void Timer1(Stopwatch stopwatch){
         //button
-
+        int timeSplit = 0;
         Button switchBtn = new Button();
         switchBtn.setPrefWidth(40);
         switchBtn.setOnAction(new EventHandler<ActionEvent>() {
@@ -49,41 +49,29 @@ public class SwitchButton extends Label{
             @Override
             public void changed(ObservableValue<? extends Boolean> observableValue, Boolean aBoolean, Boolean t1) {
                 if (t1) {
+                    split++;
                     setText("Clock ON");
                     setStyle("-fx-background-color: green;-fx-text-fill:white;");
                     setContentDisplay(ContentDisplay.RIGHT);
 //                    splitTime = Duration.ZERO;
 //                    splitTimeSeconds.set(splitTime.toSeconds());
-                    stopwatch.start();
-                    System.out.println("System ON");
-
+                    System.out.println(split);
+                    if (split == 0) {
+                        stopwatch.start();
+                        System.out.println("System ON");
+                    }
                 }
                 else {
+                    split--;
                     setText("Clock OFF");
                     setStyle("-fx-background-color: red;-fx-text-fill:white;");
                     setContentDisplay(ContentDisplay.LEFT);
                     stopwatch.reset();
                     System.out.println("System OFF");
-//                    timeline = new Timeline(new KeyFrame(
-//                            Duration.millis(1000), new EventHandler<ActionEvent>() {
-//                        @Override
-//                        public void handle(ActionEvent actionEvent) {
-//                            Duration duration = ((KeyFrame) actionEvent.getSource()).getTime();
-//                            time = time.add(duration);
-//                            splitTime = splitTime.add(duration);
-//                            timeSeconds.set(time.toSeconds());
-//                            splitTimeSeconds.set(splitTime.toSeconds());
-//                        }
                 }
-//                    timeline.setCycleCount(Timeline.INDEFINITE);
-//                    timeline.play();
             }
         });
         switchedON.set(false);
-//        TextArea textField = new TextArea();
-//        textField.setBounds(20, 20, 300, 30);
-//        Text info = new Text(20, 39, "timerLabel");
-
     }
     public SimpleBooleanProperty switchOnProperty() { return switchedON; }
 }
