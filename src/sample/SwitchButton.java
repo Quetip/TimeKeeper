@@ -29,16 +29,11 @@ import javafx.util.Duration;
 public class SwitchButton extends Label{
 
     private SimpleBooleanProperty switchedON = new SimpleBooleanProperty(true);
-    //time fields
-    private Timeline timeline;
-    private Label timerLabel = new Label(), splitTimerLabel = new Label();
-    private DoubleProperty timeSeconds = new SimpleDoubleProperty(),
-            splitTimeSeconds = new SimpleDoubleProperty();
-    private Duration time = Duration.ZERO, splitTime = Duration.ZERO;
 
     //method
-    public void Timer1(){
+    public void Timer1(Stopwatch stopwatch){
         //button
+
         Button switchBtn = new Button();
         switchBtn.setPrefWidth(40);
         switchBtn.setOnAction(new EventHandler<ActionEvent>() {
@@ -57,16 +52,18 @@ public class SwitchButton extends Label{
                     setText("Clock ON");
                     setStyle("-fx-background-color: green;-fx-text-fill:white;");
                     setContentDisplay(ContentDisplay.RIGHT);
-                    splitTime = Duration.ZERO;
-                    splitTimeSeconds.set(splitTime.toSeconds());
-                    System.out.println("test");
+//                    splitTime = Duration.ZERO;
+//                    splitTimeSeconds.set(splitTime.toSeconds());
+                    stopwatch.start();
+                    System.out.println("System ON");
 
                 }
                 else {
                     setText("Clock OFF");
                     setStyle("-fx-background-color: red;-fx-text-fill:white;");
                     setContentDisplay(ContentDisplay.LEFT);
-                    System.out.println("test1");
+                    stopwatch.reset();
+                    System.out.println("System OFF");
 //                    timeline = new Timeline(new KeyFrame(
 //                            Duration.millis(1000), new EventHandler<ActionEvent>() {
 //                        @Override
@@ -78,40 +75,15 @@ public class SwitchButton extends Label{
 //                            splitTimeSeconds.set(splitTime.toSeconds());
 //                        }
                 }
-                    timeline.setCycleCount(Timeline.INDEFINITE);
-                    timeline.play();
+//                    timeline.setCycleCount(Timeline.INDEFINITE);
+//                    timeline.play();
             }
         });
         switchedON.set(false);
-        TextArea textField = new TextArea();
-        textField.setBounds(20, 20, 300, 30);
-        Text info = new Text(20, 39, "timerLabel");
-        //display
-//        StackPane root = new StackPane();
-//        Scene scene = new Scene(root, 300, 300);
-//        VBox vb = new VBox(20);
-//        vb.setAlignment(Pos.CENTER);
-//        vb.setPrefWidth(scene.getWidth());
-//        vb.setLayoutY(30);
-//        vb.getChildren().add(vb);
-//
-//        primaryStage.setTitle("timer");
-//        primaryStage.setScene(scene);
-//        primaryStage.show();
+//        TextArea textField = new TextArea();
+//        textField.setBounds(20, 20, 300, 30);
+//        Text info = new Text(20, 39, "timerLabel");
 
     }
     public SimpleBooleanProperty switchOnProperty() { return switchedON; }
-//    public int counter(int timer) {
-//
-//        while (count % 2 != 0) {
-//            timer++;
-//
-//            try {
-//                TimeUnit.SECONDS.sleep(1);
-//            } catch (InterruptedException e) {
-//                e.printStackTrace();
-//            }
-//        }
-//        return timer;
-//    }
 }
