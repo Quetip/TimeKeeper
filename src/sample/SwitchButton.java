@@ -14,6 +14,7 @@ import java.util.concurrent.TimeUnit;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
@@ -31,9 +32,12 @@ public class SwitchButton extends Label{
 
     private SimpleBooleanProperty switchedON = new SimpleBooleanProperty(true);
 //    private Stopwatch stopwatch = new Stopwatch();
+    int time = 0;
 
-    public void Timer1(Stopwatch stopwatch){
+    public int Timer1(Stopwatch stopwatch, ObservableList<TimeTable> data){
+
         //button
+        //TimeTable updateTime = new TimeTable();
         Button switchBtn = new Button();
         switchBtn.setPrefWidth(40);
         switchBtn.setOnAction(new EventHandler<ActionEvent>() {
@@ -41,23 +45,32 @@ public class SwitchButton extends Label{
             public void handle(ActionEvent actionEvent) {
                 switchedON.set(!switchedON.get());
                 stopwatch.start();
+                time = stopwatch.countTime();
+                data.add(new TimeTable(stopwatch.printTime(),"X"));
             }
         });
         setGraphic(switchBtn);
-        //button
+        SwitchButtonOn(stopwatch);
+        //button listener
+
+        return time;
+    }
+
+    public void SwitchButtonOn(Stopwatch stopwatch){
         switchedON.addListener(new ChangeListener<Boolean>() {
             @Override
             public void changed(ObservableValue<? extends Boolean> observableValue, Boolean aBoolean, Boolean t1) {
                 if (t1) {
                     System.out.println("System ON");
-                    setText("Clock ON");
+                    setText("Clock IN");
                     setStyle("-fx-background-color: green;-fx-text-fill:white;");
                     setContentDisplay(ContentDisplay.RIGHT);
                 }
                 else {
-                    setText("Clock OFF");
+                    setText("Clock OUT");
                     setStyle("-fx-background-color: red;-fx-text-fill:white;");
                     setContentDisplay(ContentDisplay.LEFT);
+
                     stopwatch.reset();
                     System.out.println("System OFF");
                 }
@@ -65,6 +78,7 @@ public class SwitchButton extends Label{
         });
         switchedON.set(false);
     }
+
     public SimpleBooleanProperty switchOnProperty() {
         return switchedON;
     }
