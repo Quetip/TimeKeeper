@@ -1,2 +1,2 @@
 # TimeKeeper
-Time keeper to log personal time.
+Time keeper to log work time.
