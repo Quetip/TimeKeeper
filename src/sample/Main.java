@@ -45,7 +45,7 @@ public class Main extends Application {
     private Stopwatch getTime;
     private final TableView<TimeTable> table = new TableView<>();
     private final ObservableList<TimeTable> data =
-            FXCollections.observableArrayList(new TimeTable("A", "B"));
+            FXCollections.observableArrayList(new TimeTable(" ", " "));
     final HBox hb = new HBox();
 
     public void start(Stage primaryStage) throws Exception{
@@ -74,25 +74,29 @@ public class Main extends Application {
         //switch button
         SwitchButton switchButton = new SwitchButton();
 
-        System.out.println(test);
         switchButton.switchOnProperty();
         switchButton.setTranslateX(250);
         switchButton.setTranslateY(40);
+
+//        commented out 9/19/21
+//        timer = new Timer(speed, this);
+//        timer.set
+
 
 //        switchButton.setTranslateZ(40);
 
         //table
         //TableView table = new TableView();
-        Stopwatch newWatch = new Stopwatch();
+        //Stopwatch newWatch = new Stopwatch();
 
         //set table columns
         TableColumn firstNameCol = new TableColumn("Time");
-
+        //firstNameCol.set
         firstNameCol.setMinWidth(100);
         firstNameCol.setCellValueFactory(
                 new PropertyValueFactory<>("firstName"));
 
-        TableColumn lastNameCol = new TableColumn("Last Name");
+        TableColumn lastNameCol = new TableColumn("Total");
         lastNameCol.setMinWidth(100);
         lastNameCol.setCellValueFactory(
                 new PropertyValueFactory<>("lastName"));
@@ -105,14 +109,9 @@ public class Main extends Application {
 //            data.add(new Person("Z","X"));
 //        });
         test = switchButton.Timer1(stopwatch, data);
-        final Button addButton = new Button("Add");
-        addButton.setOnAction((ActionEvent e) -> {
-            newWatch.start();
-            //switchButton.switchOnProperty();
-            data.add(new TimeTable(newWatch.printTime(),"X"));
-        });
+//        System.out.println(test);
 //
-        hb.getChildren().addAll(addButton);
+        //hb.getChildren().addAll(addButton);
         hb.setSpacing(3);
 
         final VBox vbox = new VBox();
@@ -121,7 +120,6 @@ public class Main extends Application {
         vbox.getChildren().addAll(table, hb);
 
         //add columns to the table
-
 
 //        VBox vbox = new VBox(tableView);
 
@@ -142,10 +140,9 @@ public class Main extends Application {
     }
 
 
-
     public static void main(String[] args) {
         launch(args);
     }
 
 }
-
+//System.currentTi8meMillis() / 1000

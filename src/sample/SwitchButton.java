@@ -33,9 +33,10 @@ public class SwitchButton extends Label{
     private SimpleBooleanProperty switchedON = new SimpleBooleanProperty(true);
 //    private Stopwatch stopwatch = new Stopwatch();
     int time = 0;
+    private int countTime = 0;
+
 
     public int Timer1(Stopwatch stopwatch, ObservableList<TimeTable> data){
-
         //button
         //TimeTable updateTime = new TimeTable();
         Button switchBtn = new Button();
@@ -43,25 +44,36 @@ public class SwitchButton extends Label{
         switchBtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
+                CountTime timeInSeconds = new CountTime();
+
                 switchedON.set(!switchedON.get());
                 stopwatch.start();
-                time = stopwatch.countTime();
-                data.add(new TimeTable(stopwatch.printTime(),"X"));
+                //time = stopwatch.countTime();
             }
         });
         setGraphic(switchBtn);
-        SwitchButtonOn(stopwatch);
+        SwitchButtonOn(stopwatch, data);
         //button listener
-
         return time;
     }
 
-    public void SwitchButtonOn(Stopwatch stopwatch){
+    public void SwitchButtonOn(Stopwatch stopwatch, ObservableList<TimeTable> data){
+        //DateAndTime printTime = new DateAndTime();
+
         switchedON.addListener(new ChangeListener<Boolean>() {
             @Override
             public void changed(ObservableValue<? extends Boolean> observableValue, Boolean aBoolean, Boolean t1) {
+                long createdMillis = System.currentTimeMillis();
+                long nowMillis = System.currentTimeMillis();
+
                 if (t1) {
+
+                    //System.out.println("date = " + printTime.StartTime());
+                    //printTime.StartTime();
+
                     System.out.println("System ON");
+
+//                    System.out.println(timeInSeconds.getAgeInSeconds(time));
                     setText("Clock IN");
                     setStyle("-fx-background-color: green;-fx-text-fill:white;");
                     setContentDisplay(ContentDisplay.RIGHT);
@@ -70,13 +82,24 @@ public class SwitchButton extends Label{
                     setText("Clock OUT");
                     setStyle("-fx-background-color: red;-fx-text-fill:white;");
                     setContentDisplay(ContentDisplay.LEFT);
-
+                    if (time > 0){
+                        data.add(new TimeTable(stopwatch.printTime(),"X"));
+                    }
+                    time++;
                     stopwatch.reset();
+                    stopwatch.countTime();
+                    //System.out.println("time = " + time);
                     System.out.println("System OFF");
                 }
             }
         });
         switchedON.set(false);
+    }
+
+    public void getTotalTime(int time){
+        countTime += time;
+        System.out.println("Time = " + countTime);
+        //data.add(new TimeTable(stopwatch.printTime(),"X"));
     }
 
     public SimpleBooleanProperty switchOnProperty() {

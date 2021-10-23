@@ -47,17 +47,17 @@ public class Controller {
                     splitTimeSeconds.set(splitTime.toSeconds());
                 } else {
                     timeline = new Timeline(
-                            new KeyFrame(Duration.millis(100),
-                                    new EventHandler<ActionEvent>() {
-                                        @Override
-                                        public void handle(ActionEvent t) {
-                                            Duration duration = ((KeyFrame)t.getSource()).getTime();
-                                            time = time.add(duration);
-                                            splitTime = splitTime.add(duration);
-                                            timeSeconds.set(time.toSeconds());
-                                            splitTimeSeconds.set(splitTime.toSeconds());
-                                        }
-                                    })
+                        new KeyFrame(Duration.millis(100),
+                            new EventHandler<ActionEvent>() {
+                            @Override
+                            public void handle(ActionEvent t) {
+                                Duration duration = ((KeyFrame)t.getSource()).getTime();
+                                time = time.add(duration);
+                                splitTime = splitTime.add(duration);
+                                timeSeconds.set(time.toSeconds());
+                                splitTimeSeconds.set(splitTime.toSeconds());
+                            }
+                        })
                     );
                     timeline.setCycleCount(Timeline.INDEFINITE);
                     timeline.play();
