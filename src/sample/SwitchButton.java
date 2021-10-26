@@ -33,8 +33,8 @@ public class SwitchButton extends Label{
     private SimpleBooleanProperty switchedON = new SimpleBooleanProperty(true);
 //    private Stopwatch stopwatch = new Stopwatch();
     int time = 0;
-    private int countTime = 0;
-
+//    private int countTime = 0;
+CountTimeInMilis timeCount = new CountTimeInMilis();
 
     public int Timer1(Stopwatch stopwatch, ObservableList<TimeTable> data){
         //button
@@ -44,8 +44,9 @@ public class SwitchButton extends Label{
         switchBtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                CountTime timeInSeconds = new CountTime();
 
+
+                //                CountTime timeCount = new CountTime();
                 switchedON.set(!switchedON.get());
                 stopwatch.start();
                 //time = stopwatch.countTime();
@@ -90,17 +91,18 @@ public class SwitchButton extends Label{
                     stopwatch.countTime();
                     //System.out.println("time = " + time);
                     System.out.println("System OFF");
+                    timeCount.getAgeInSeconds();
                 }
             }
         });
         switchedON.set(false);
     }
 
-    public void getTotalTime(int time){
-        countTime += time;
-        System.out.println("Time = " + countTime);
-        //data.add(new TimeTable(stopwatch.printTime(),"X"));
-    }
+//    public void getTotalTime(int time){
+//        countTime += time;
+//        System.out.println("Time = " + countTime);
+//        //data.add(new TimeTable(stopwatch.printTime(),"X"));
+//    }
 
     public SimpleBooleanProperty switchOnProperty() {
         return switchedON;
