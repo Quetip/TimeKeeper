@@ -34,7 +34,8 @@ public class SwitchButton extends Label{
 //    private Stopwatch stopwatch = new Stopwatch();
     int time = 0;
 //    private int countTime = 0;
-CountTimeInMilis timeCount = new CountTimeInMilis();
+//CountTimeInMilis timeCount = new CountTimeInMilis();
+
 
     public int Timer1(Stopwatch stopwatch, ObservableList<TimeTable> data){
         //button
@@ -48,7 +49,11 @@ CountTimeInMilis timeCount = new CountTimeInMilis();
 
                 //                CountTime timeCount = new CountTime();
                 switchedON.set(!switchedON.get());
-                stopwatch.start();
+                try {
+                    stopwatch.start();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
                 //time = stopwatch.countTime();
             }
         });
@@ -62,11 +67,11 @@ CountTimeInMilis timeCount = new CountTimeInMilis();
         //DateAndTime printTime = new DateAndTime();
 
         switchedON.addListener(new ChangeListener<Boolean>() {
+            long createdMillis = System.currentTimeMillis();
+
             @Override
             public void changed(ObservableValue<? extends Boolean> observableValue, Boolean aBoolean, Boolean t1) {
-                long createdMillis = System.currentTimeMillis();
-                long nowMillis = System.currentTimeMillis();
-
+                long start = System.nanoTime();
                 if (t1) {
 
                     //System.out.println("date = " + printTime.StartTime());
@@ -91,7 +96,15 @@ CountTimeInMilis timeCount = new CountTimeInMilis();
                     stopwatch.countTime();
                     //System.out.println("time = " + time);
                     System.out.println("System OFF");
-                    timeCount.getAgeInSeconds();
+                    long nowMillis = System.currentTimeMillis();
+                    // finding the time after the operation is executed
+                    long end = System.currentTimeMillis();
+                    //finding the time difference and converting it into seconds
+                    float sec = (end - start) / 1000F; System.out.println(sec + " seconds");
+//                    System.out.println("Count in sec" + (int)((nowMillis - this.createdMillis) / 1000));
+                    createdMillis = System.currentTimeMillis();
+
+//                    timeCount.getAgeInSeconds();
                 }
             }
         });
