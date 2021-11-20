@@ -1,0 +1,6 @@
+
+add Clock
+
+add notes for clock in/out
+
+add time table

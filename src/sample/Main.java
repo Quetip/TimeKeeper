@@ -67,7 +67,7 @@ public class Main extends Application {
         stopwatch.setTextFill(Color.BLACK);
         stopwatch.setStyle("-fx-font-size: 4em;");
         stopwatch.setTranslateX(0);
-        stopwatch.setTranslateY(50);
+        stopwatch.setTranslateY(500);
         stopwatch.setOnMouseClicked(null);
         stopwatch.setMouseTransparent(true);
         //stopwatch start
@@ -120,6 +120,7 @@ public class Main extends Application {
         vbox.setSpacing(5);
         vbox.setPadding(new Insets(10, 0, 0, 10));
         vbox.getChildren().addAll(table, hb);
+//        vbox.setTranslateY(500);
 
         //add columns to the table
 
