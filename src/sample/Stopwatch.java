@@ -88,8 +88,8 @@ public class Stopwatch extends Button {
 
         timeTotal += sec;
         System.out.println("Total time in Seconds: " + timeTotal);
-        end = System.currentTimeMillis();
-        start = System.currentTimeMillis();
+//        end = System.currentTimeMillis();
+//        start = System.currentTimeMillis();
         sec = System.currentTimeMillis();
         return sec;
     }
@@ -101,113 +101,31 @@ public class Stopwatch extends Button {
         }
         return start;
     }
-
-    public void start() throws InterruptedException {
-//        TimeTable timeTime = new TimeTable();
-
-        //long nanTime1 = System.nanoTime();
-        if (active) {
-            //System.out.println(timeCount.createdMillis);
-            System.out.println(countTime);
-            timer.stop();
-            long endTime = System.currentTimeMillis();
-//            long timeInMilliseconds = (endTime - startTime);
-            Date endDate = new Date();
-            int numSeconds = (int)((endDate.getTime() - startDate.getTime()) / 1000);
-
-            //int subTotalTimes = );
-//            System.out.println("time in seconds?: " + ((int)((nowMillis - this.createdMillis) / 1000))/3);
-
-            System.out.println("time in milis?: " + ((endTime - startTime) / 1000F)%2);
-//            subTotalTime += timeInMilliseconds / 1000;
-            System.out.println("Subtotaled time: " + subTotalTime);
-//            timeCount.getAgeInSeconds();
-            createdMillis = System.currentTimeMillis();
-            startTime = System.currentTimeMillis();
-//            System.out.println("hmm: " + timeCount.getAgeInSeconds());
-            timeline.stop();
-            active = false;
-            timeSeconds.set(makeText(time));
-//            timeSeconds.get();
-//            Integer output = Integer.parseInt(timeSeconds));
-//            System.out.println("The integer of a string input is: " + timeSeconds.get());
-//            AddUpMillis(timeSeconds.get());
-            getTimeInSeconds(timeValue);
-
-            timeValue = System.currentTimeMillis();
-            return;
-        }
-
-        active = true;
-        timeValue = countTimeInSeconds();
-        if (timeline == null) {
-            timer.start();
-//            timeCount.getAgeInSeconds();
-
-            //System.out.println("Nano Time = " + (System.nanoTime() / 1000));
-            //timeCount.startTimer();
-            timeline = new Timeline(
-                new KeyFrame(Duration.millis(100),
-                e2 -> {
-                    if (!active) {
-                        return;
-                    }
-                    final Duration duration = ((KeyFrame) e2.getSource()).getTime();
-                    remainingTime = (int) (duration.toSeconds() % 60.0);
-                    //System.out.println(remainingTime);
-                    time = time.add(duration);
-                    //int getTime = Duration.seconds(time);
-                    countTime = makeText(time);
-                    timeSeconds.set(makeText(time));
-                })
-            );
-
-//            System.out.println("is this running?");
-        }
-        timeline.setCycleCount(Timeline.INDEFINITE);
-        timeline.play();
-    }
-//    public String getTime() {
-////        this.countTime;
-//        return countTime;
-//    }
-
     /**
      * duration to text.
      * @param //duration
      * @return
      */
-
     private String makeText(final Duration duration) {
-//        long timeout = System.currentTimeMillis() + (remainingTime * 1000);
-//        System.out.println((timeout - System.currentTimeMillis()) / 1000);
-        //long integerTime = (long) (duration.toSeconds() % 60.0);
-
         return String.format("%02d:%02d:%02d:%02d",
-            (long) (duration.toHours() % 60.0),
-            (long) (duration.toMinutes() % 60.0),
-            (long) (duration.toSeconds() % 60.0),
-            (long) (duration.toMillis() % 60.0));
+                (long) (duration.toHours() % 60.0),
+                (long) (duration.toMinutes() % 60.0),
+                (long) (duration.toSeconds() % 60.0),
+                (long) (duration.toMillis() % 60.0));
 //           + (active ? "▶" : "■"
-        }
+    }
 
     public String printTime() {
         return countTime;
     }
 
     public int countTime() {
-        int countTime = -1;
-
         new KeyFrame(Duration.millis(100),
-            e2 -> {
-                final Duration duration = ((KeyFrame) e2.getSource()).getTime();
-                remainingTime = (int) (duration.toSeconds() % 60.0);
-//                    remainingTime = remainingTime + 100;
-                System.out.println("remaining Time = " + remainingTime);;
-                //callTime.getTotalTime(remainingTime);
-                //incrementTime += remainingTime;
-                //System.out.println(remainingTime);
-            });
+                e2 -> {
+                    final Duration duration = ((KeyFrame) e2.getSource()).getTime();
+                    remainingTime = (int) (duration.toSeconds() % 60.0);
+                    System.out.println("remaining Time = " + remainingTime);;
+                });
         return remainingTime;
     }
 
@@ -227,5 +145,51 @@ public class Stopwatch extends Button {
 
         return active;
     }
+
+    public void start() throws InterruptedException { //throws due to millis counter
+
+        if (active) {
+            System.out.println(countTime);
+            timer.stop();
+//            long endTime = System.currentTimeMillis();
+
+//            System.out.println("time in milis?: " + ((endTime - startTime) / 1000F)%2);
+//            System.out.println("Subtotaled time: " + subTotalTime);
+            createdMillis = System.currentTimeMillis();
+            startTime = System.currentTimeMillis();
+            timeline.stop();
+            active = false;
+            timeSeconds.set(makeText(time));
+            getTimeInSeconds(timeValue);
+
+            timeValue = System.currentTimeMillis();
+            return;
+        }
+
+        active = true;
+        timeValue = countTimeInSeconds();
+        if (timeline == null) {
+            timer.start();
+            timeline = new Timeline(
+                new KeyFrame(Duration.millis(100),
+                e2 -> {
+                    if (!active) {
+                        return;
+                    }
+                    final Duration duration = ((KeyFrame) e2.getSource()).getTime();
+                    remainingTime = (int) (duration.toSeconds() % 60.0);
+                    time = time.add(duration);
+                    countTime = makeText(time);
+//                    timeSeconds.set(makeText(time));
+                })
+            );
+        }
+        timeline.setCycleCount(Timeline.INDEFINITE);
+        timeline.play();
+    }
+
+
+
+
 //    @author Toast kid
 }

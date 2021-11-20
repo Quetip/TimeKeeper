@@ -100,7 +100,7 @@ public class SwitchButton extends Label{
                     // finding the time after the operation is executed
                     long end = System.currentTimeMillis();
                     //finding the time difference and converting it into seconds
-                    float sec = (end - start) / 1000F; System.out.println(sec + " seconds");
+//                    float sec = (end - start) / 1000F; System.out.println(sec + " seconds");
 //                    System.out.println("Count in sec" + (int)((nowMillis - this.createdMillis) / 1000));
                     createdMillis = System.currentTimeMillis();
 

@@ -37,20 +37,20 @@ public class TimeTable{
 //    public void setClockIn(String clockIn) {
 //        this.clockIn = clockIn;
 //    }
-    public final SimpleStringProperty firstName;
+    public final SimpleStringProperty Time;
     public final SimpleStringProperty lastName;
 
     TimeTable(String fName, String lName) {
-        this.firstName = new SimpleStringProperty(fName);
+        this.Time = new SimpleStringProperty(fName);
         this.lastName = new SimpleStringProperty(lName);
     }
 
     public String getFirstName() {
-        return firstName.get();
+        return Time.get();
     }
 
     public void setFirstName(String fName) {
-        firstName.set(fName);
+        Time.set(fName);
     }
 
     public String getLastName() {
