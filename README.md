@@ -1,2 +1,1 @@
-# TimeKeeper
-Time keeper to log work time.
+Time flies when you're putting in work. Time keeped seeks to keep time for you while youre,putting in worktime . whether in be in personal projects,or for a job. The Time Keeper app seeks to keep accurate time for you. Log in the hours your putting into projects or work. Track you time over weeks, months or years!
