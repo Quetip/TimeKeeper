@@ -35,7 +35,28 @@ public class SwitchButton extends Label{
     int time = 0;
 //    private int countTime = 0;
 //CountTimeInMilis timeCount = new CountTimeInMilis();
+    long timeValue;
+    float timeValue2;
+    long timeTotal = 0;
+    float sec;
 
+    public float getTimeInSeconds(long start){
+        long end = System.currentTimeMillis();
+        //finding the time difference and converting it into seconds
+        sec = (end - start) / 1000F;
+
+//        float sec = (end - start) / 1000F;
+        System.out.println(sec + " seconds");
+
+        timeTotal += sec;
+        System.out.println("Total time in Seconds (switchButton): " + timeTotal);
+//        sec.set(makeText(time));
+//        sec = makeText(time);
+//        Float.valueOf()
+        sec = System.currentTimeMillis();
+//        timeTotal
+        return timeTotal;
+    }
 
     public int Timer1(Stopwatch stopwatch, ObservableList<TimeTable> data){
         //button
@@ -71,11 +92,8 @@ public class SwitchButton extends Label{
 
             @Override
             public void changed(ObservableValue<? extends Boolean> observableValue, Boolean aBoolean, Boolean t1) {
-                long start = System.nanoTime();
+                long start;
                 if (t1) {
-
-                    //System.out.println("date = " + printTime.StartTime());
-                    //printTime.StartTime();
 
                     System.out.println("System ON");
 
@@ -83,40 +101,32 @@ public class SwitchButton extends Label{
                     setText("Clock IN");
                     setStyle("-fx-background-color: green;-fx-text-fill:white;");
                     setContentDisplay(ContentDisplay.RIGHT);
+//                    timeValue2 = stopwatch.getTimeInSeconds(timeValue);
                 }
                 else {
                     setText("Clock OUT");
                     setStyle("-fx-background-color: red;-fx-text-fill:white;");
                     setContentDisplay(ContentDisplay.LEFT);
+                    Stopwatch test = new Stopwatch();
                     if (time > 0){
-                        data.add(new TimeTable(stopwatch.printTime(),"X"));
+//                        data.add(new TimeTable(stopwatch.printTime(),String.valueOf(sample.Stopwatch.sec)));
+                        data.add(new TimeTable(stopwatch.printTime(),String.valueOf(getTimeInSeconds(timeValue))));
+                        timeValue = System.currentTimeMillis();
                     }
                     time++;
                     stopwatch.reset();
                     stopwatch.countTime();
                     //System.out.println("time = " + time);
                     System.out.println("System OFF");
-                    long nowMillis = System.currentTimeMillis();
-                    // finding the time after the operation is executed
-                    long end = System.currentTimeMillis();
-                    //finding the time difference and converting it into seconds
-//                    float sec = (end - start) / 1000F; System.out.println(sec + " seconds");
-//                    System.out.println("Count in sec" + (int)((nowMillis - this.createdMillis) / 1000));
                     createdMillis = System.currentTimeMillis();
-
-//                    timeCount.getAgeInSeconds();
                 }
             }
         });
         switchedON.set(false);
     }
-
-//    public void getTotalTime(int time){
-//        countTime += time;
-//        System.out.println("Time = " + countTime);
-//        //data.add(new TimeTable(stopwatch.printTime(),"X"));
-//    }
-
+    public void PrintTime() {
+//        data.add(new TimeTable(stopwatch.printTime(),String.valueOf(sample.Stopwatch.sec)));
+    }
     public SimpleBooleanProperty switchOnProperty() {
         return switchedON;
     }

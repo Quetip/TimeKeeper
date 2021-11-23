@@ -33,7 +33,7 @@ public class Stopwatch extends Button {
 
     /** timeline. */
     private Timeline timeline;
-    long someTime;
+//    float someTime;
     /** String property. */
     private final StringProperty timeSeconds = new SimpleStringProperty();
 
@@ -45,18 +45,14 @@ public class Stopwatch extends Button {
 
     private int remainingTime = 0;
     //private int incrementTime = 0;
-    private SwitchButton callTime = new SwitchButton();
 
     /** print time **/
 
     public String countTime;
     public TimeTable returnTime;
-//    CountTimeInMilis timeCount = new CountTimeInMilis();
-
-    private long startTime  = System.currentTimeMillis();
     Timer timer  = new Timer();
     double subTotalTime;
-
+    static public float sec = 0;
     float timeTotal = 0;
     /**
      * initialize this component.
@@ -75,7 +71,6 @@ public class Stopwatch extends Button {
     /**
      * start count up.
      */
-    private long createdMillis = System.currentTimeMillis();
     long nowMillis = System.currentTimeMillis();
     Date startDate = new Date();
     long timeValue;
@@ -83,13 +78,15 @@ public class Stopwatch extends Button {
     public float getTimeInSeconds(long start){
         long end = System.currentTimeMillis();
         //finding the time difference and converting it into seconds
-        float sec = (end - start) / 1000F;
-        System.out.println(sec + " seconds");
+        sec = (end - start) / 1000F;
 
+//        float sec = (end - start) / 1000F;
+        System.out.println(sec + " seconds");
         timeTotal += sec;
         System.out.println("Total time in Seconds: " + timeTotal);
-//        end = System.currentTimeMillis();
-//        start = System.currentTimeMillis();
+//        sec.set(makeText(time));
+//        sec = makeText(time);
+//        Float.valueOf()
         sec = System.currentTimeMillis();
         return sec;
     }
@@ -147,16 +144,10 @@ public class Stopwatch extends Button {
     }
 
     public void start() throws InterruptedException { //throws due to millis counter
-
         if (active) {
             System.out.println(countTime);
             timer.stop();
-//            long endTime = System.currentTimeMillis();
 
-//            System.out.println("time in milis?: " + ((endTime - startTime) / 1000F)%2);
-//            System.out.println("Subtotaled time: " + subTotalTime);
-            createdMillis = System.currentTimeMillis();
-            startTime = System.currentTimeMillis();
             timeline.stop();
             active = false;
             timeSeconds.set(makeText(time));
@@ -180,16 +171,13 @@ public class Stopwatch extends Button {
                     remainingTime = (int) (duration.toSeconds() % 60.0);
                     time = time.add(duration);
                     countTime = makeText(time);
-//                    timeSeconds.set(makeText(time));
+                    timeSeconds.set(makeText(time));
+//                    Float.valueOf(String.valueOf(timeSeconds));
                 })
             );
         }
         timeline.setCycleCount(Timeline.INDEFINITE);
         timeline.play();
     }
-
-
-
-
 //    @author Toast kid
 }
