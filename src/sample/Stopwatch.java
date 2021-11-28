@@ -31,32 +31,21 @@ import java.util.Date;
  */
 public class Stopwatch extends Button {
 
-    /** timeline. */
     private Timeline timeline;
-//    float someTime;
-    /** String property. */
     private final StringProperty timeSeconds = new SimpleStringProperty();
-
-    /** contanis duration. */
     private Duration time = Duration.ZERO;
-
-    /** this timer is active. */
     private boolean active;
-
     private int remainingTime = 0;
-    //private int incrementTime = 0;
-
-    /** print time **/
-
     public String countTime;
     public TimeTable returnTime;
     Timer timer  = new Timer();
     double subTotalTime;
     static public float sec = 0;
     float timeTotal = 0;
-    /**
-     * initialize this component.
-     */
+    long nowMillis = System.currentTimeMillis();
+    Date startDate = new Date();
+    long timeValue;
+
     public Stopwatch() {
         this.textProperty().bind(timeSeconds);
         this.setOnAction(eve -> {
@@ -68,25 +57,15 @@ public class Stopwatch extends Button {
         });
         reset();
     }
-    /**
-     * start count up.
-     */
-    long nowMillis = System.currentTimeMillis();
-    Date startDate = new Date();
-    long timeValue;
 
     public float getTimeInSeconds(long start){
         long end = System.currentTimeMillis();
         //finding the time difference and converting it into seconds
         sec = (end - start) / 1000F;
-
 //        float sec = (end - start) / 1000F;
         System.out.println(sec + " seconds");
         timeTotal += sec;
         System.out.println("Total time in Seconds: " + timeTotal);
-//        sec.set(makeText(time));
-//        sec = makeText(time);
-//        Float.valueOf()
         sec = System.currentTimeMillis();
         return sec;
     }
@@ -134,10 +113,10 @@ public class Stopwatch extends Button {
         timeSeconds.set(makeText(time));
     }
 
-    /**
-     * get is active.
-     * @return active(boolean)
-     */
+    public float exportTime(float time) {
+
+        return time;
+    }
     public boolean isActive() {
 
         return active;
