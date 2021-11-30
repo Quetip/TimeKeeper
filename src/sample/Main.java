@@ -50,8 +50,6 @@ public class Main extends Application {
     final HBox hb = new HBox();
 
     public void start(Stage primaryStage) throws Exception{
-
-
         primaryStage.setTitle("Time Keeper");
 
         //text
@@ -71,7 +69,6 @@ public class Main extends Application {
         stopwatch.setOnMouseClicked(null);
         stopwatch.setMouseTransparent(true);
         //stopwatch start
-        int test = 0;
 
         //switch button
         SwitchButton switchButton = new SwitchButton();
@@ -79,17 +76,6 @@ public class Main extends Application {
         switchButton.switchOnProperty();
         switchButton.setTranslateX(250);
         switchButton.setTranslateY(40);
-
-//        commented out 9/19/21
-//        timer = new Timer(speed, this);
-//        timer.set
-
-
-//        switchButton.setTranslateZ(40);
-
-        //table
-        //TableView table = new TableView();
-        //Stopwatch newWatch = new Stopwatch();
 
         //set table columns
         TableColumn firstNameCol = new TableColumn("Time");
@@ -105,28 +91,13 @@ public class Main extends Application {
 
         table.setItems(data);
         table.getColumns().addAll(firstNameCol, lastNameCol);
-
-//        final Button addButton = new Button("Add");
-//        addButton.setOnAction((ActionEvent e) -> {
-//            data.add(new Person("Z","X"));
-//        });
-        test = switchButton.Timer1(stopwatch, data);
-//        System.out.println(test);
-//
-        //hb.getChildren().addAll(addButton);
+        switchButton.Timer1(stopwatch, data);
         hb.setSpacing(3);
 
         final VBox vbox = new VBox();
         vbox.setSpacing(5);
         vbox.setPadding(new Insets(10, 0, 0, 10));
         vbox.getChildren().addAll(table, hb);
-//        vbox.setTranslateY(500);
-
-        //add columns to the table
-
-//        VBox vbox = new VBox(tableView);
-
-
         //Scene
         primaryStage.setScene(new Scene(new HBox(stopwatch), 320, 100));
 
@@ -142,10 +113,7 @@ public class Main extends Application {
         primaryStage.show();
     }
 
-
     public static void main(String[] args) {
         launch(args);
     }
-
 }
-//System.currentTi8meMillis() / 1000

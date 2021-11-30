@@ -33,7 +33,7 @@ public class SwitchButton extends Label{
     private SimpleBooleanProperty switchedON = new SimpleBooleanProperty(true);
     int time = 0;
     private boolean active;
-    long timeValue;
+    long timeValue = 0;
     float timeValue2;
     long timeTotal = 0;
     static public float sec = 0;
@@ -42,7 +42,7 @@ public class SwitchButton extends Label{
         long end = System.currentTimeMillis();
         //finding the time difference and converting it into seconds
         sec = (end - start) / 1000F;
-        System.out.println(sec + " Switch button seconds");
+        System.out.println(sec + " seconds (Switch Button)");
 
         timeTotal += sec;
         System.out.println("Total time in Seconds (switchButton): " + timeTotal);
@@ -76,6 +76,7 @@ public class SwitchButton extends Label{
         for (int i = 0; i <5; i++) {
             Thread.sleep(60);
         }
+        System.out.println("start time = " + start);
         return start;
     }
 
@@ -83,49 +84,71 @@ public class SwitchButton extends Label{
         //DateAndTime printTime = new DateAndTime();
 
         switchedON.addListener(new ChangeListener<Boolean>() {
-            long createdMillis = System.currentTimeMillis();
+
+//            long createdMillis = System.currentTimeMillis();
 
             @Override
             public void changed(ObservableValue<? extends Boolean> observableValue, Boolean aBoolean, Boolean t1) {
-                active = true;
-                try {
-                    timeValue = countTimeInSeconds();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                if (t1) {
+//                active = true;
+                long createdMillis = System.currentTimeMillis();
 
+//                try {
+//                    timeValue = 0;
+//                    timeValue = countTimeInSeconds();
+//                    System.out.println("test");
+//                } catch (InterruptedException e) {
+//                    e.printStackTrace();
+//                }
+
+
+//                timeValue = System.currentTimeMillis();
+                if (t1) {
+                    for (int i = 0; i <5; i++) {
+                        try {
+                            Thread.sleep(60);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    }
                     System.out.println("System ON");
 
 //                    System.out.println(timeInSeconds.getAgeInSeconds(time));
                     setText("Clock IN");
                     setStyle("-fx-background-color: green;-fx-text-fill:white;");
                     setContentDisplay(ContentDisplay.RIGHT);
-//                    timeValue2 = stopwatch.getTimeInSeconds(timeValue);
+//                    getTimeInSeconds(timeValue);
+
+                    return;
                 }
 
                 else {
-                    setText("Clock OUT");
-                    setStyle("-fx-background-color: red;-fx-text-fill:white;");
-                    setContentDisplay(ContentDisplay.LEFT);
-                    Stopwatch test = new Stopwatch();
+
+
                     if (time > 0){
 //                        data.add(new TimeTable(stopwatch.printTime(),String.valueOf(sample.Stopwatch.sec)));
-                        timeValue = System.currentTimeMillis();
-                        data.add(new TimeTable(stopwatch.printTime(),String.valueOf(getTimeInSeconds(timeValue))));
+
+
                     }
                     time++;
+//                    stopwatch display
                     stopwatch.reset();
                     stopwatch.countTime();
                     System.out.println("System OFF");
+                    long nowMillis = System.currentTimeMillis();
+                    System.out.println("test " + (int)((nowMillis - this.timeValue) / 1000));
                     createdMillis = System.currentTimeMillis();
+                    timeValue = System.currentTimeMillis();
+                    data.add(new TimeTable(stopwatch.printTime(),String.valueOf(getTimeInSeconds(timeValue))));
+
+                    System.out.println("Time Value = " + timeValue);
+                    //                    display
+                    setText("Clock OUT");
+                    setStyle("-fx-background-color: red;-fx-text-fill:white;");
+                    setContentDisplay(ContentDisplay.LEFT);
                 }
             }
         });
         switchedON.set(false);
-    }
-    public void PrintTime() {
-//        data.add(new TimeTable(stopwatch.printTime(),String.valueOf(sample.Stopwatch.sec)));
     }
     public SimpleBooleanProperty switchOnProperty() {
         return switchedON;

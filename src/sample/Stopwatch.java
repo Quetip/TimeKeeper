@@ -14,21 +14,6 @@ import java.awt.event.ActionEvent;
 import java.beans.EventHandler;
 import java.util.Date;
 
-/**
- * Stop watch powered by JavaFX.
- *
- * <pre>
- * final Stopwatch stopwatch = new Stopwatch();
- * stopwatch.setTextFill(Color.NAVY);
- * stopwatch.setStyle("-fx-font-size: 2em;");
- * final Button reset = new JFXButton("Reset");
- * reset.setOnAction(eve -> {stopwatch.reset();});
- * new HBox().getChildren().addAll(stopwatch, reset);
- * </pre>
- *
- *
- *
- */
 public class Stopwatch extends Button {
 
     private Timeline timeline;
@@ -60,9 +45,7 @@ public class Stopwatch extends Button {
 
     public float getTimeInSeconds(long start){
         long end = System.currentTimeMillis();
-        //finding the time difference and converting it into seconds
         sec = (end - start) / 1000F;
-//        float sec = (end - start) / 1000F;
         System.out.println(sec + " seconds");
         timeTotal += sec;
         System.out.println("Total time in Seconds: " + timeTotal);
@@ -105,9 +88,6 @@ public class Stopwatch extends Button {
         return remainingTime;
     }
 
-    /**
-     * reset timer.
-     */
     public void reset() {
         time = Duration.ZERO;
         timeSeconds.set(makeText(time));
@@ -116,10 +96,6 @@ public class Stopwatch extends Button {
     public float exportTime(float time) {
 
         return time;
-    }
-    public boolean isActive() {
-
-        return active;
     }
 
     public void start() throws InterruptedException { //throws due to millis counter
@@ -151,12 +127,25 @@ public class Stopwatch extends Button {
                     time = time.add(duration);
                     countTime = makeText(time);
                     timeSeconds.set(makeText(time));
-//                    Float.valueOf(String.valueOf(timeSeconds));
                 })
             );
         }
         timeline.setCycleCount(Timeline.INDEFINITE);
         timeline.play();
     }
-//    @author Toast kid
 }
+/**
+ * Stop watch powered by JavaFX.
+ *
+ * <pre>
+ * final Stopwatch stopwatch = new Stopwatch();
+ * stopwatch.setTextFill(Color.NAVY);
+ * stopwatch.setStyle("-fx-font-size: 2em;");
+ * final Button reset = new JFXButton("Reset");
+ * reset.setOnAction(eve -> {stopwatch.reset();});
+ * new HBox().getChildren().addAll(stopwatch, reset);
+ * </pre>
+ *
+ *  @author Toast kid
+ *
+ */
