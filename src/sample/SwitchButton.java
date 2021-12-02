@@ -84,9 +84,16 @@ public class SwitchButton extends Label{
         //DateAndTime printTime = new DateAndTime();
 
         switchedON.addListener(new ChangeListener<Boolean>() {
+            private long timeValue;
 
 //            long createdMillis = System.currentTimeMillis();
-
+            for (int i = 0; i <5; i++) {
+                try {
+                    Thread.sleep(60);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
             @Override
             public void changed(ObservableValue<? extends Boolean> observableValue, Boolean aBoolean, Boolean t1) {
 //                active = true;
@@ -103,13 +110,7 @@ public class SwitchButton extends Label{
 
 //                timeValue = System.currentTimeMillis();
                 if (t1) {
-                    for (int i = 0; i <5; i++) {
-                        try {
-                            Thread.sleep(60);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-                    }
+
                     System.out.println("System ON");
 
 //                    System.out.println(timeInSeconds.getAgeInSeconds(time));
@@ -126,8 +127,6 @@ public class SwitchButton extends Label{
 
                     if (time > 0){
 //                        data.add(new TimeTable(stopwatch.printTime(),String.valueOf(sample.Stopwatch.sec)));
-
-
                     }
                     time++;
 //                    stopwatch display
